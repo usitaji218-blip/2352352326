@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Anonymous Cat">
+  <!-- уши -->
+  <path d="M52 62 L58 20 L92 48 Z" fill="#E9B57C"/>
+  <path d="M148 62 L142 20 L108 48 Z" fill="#E9B57C"/>
+  <path d="M62 56 L65 33 L82 49 Z" fill="#FFC9DE"/>
+  <path d="M138 56 L135 33 L118 49 Z" fill="#FFC9DE"/>
+  <!-- бумажный пакет -->
+  <path d="M38 58 h124 a10 10 0 0 1 10 10 v92 a16 16 0 0 1 -16 16 h-112 a16 16 0 0 1 -16 -16 v-92 a10 10 0 0 1 10 -10 z" fill="#DCAA6B"/>
+  <path d="M38 58 h124 a10 10 0 0 1 10 10 v10 h-144 v-10 a10 10 0 0 1 10 -10 z" fill="#EFCE9E"/>
+  <path d="M28 150 h144 v10 a16 16 0 0 1 -16 16 h-112 a16 16 0 0 1 -16 -16 z" fill="#C79355" opacity=".55"/>
+  <!-- глаза -->
+  <ellipse cx="78" cy="112" rx="12" ry="14" fill="#33243B"/>
+  <ellipse cx="122" cy="112" rx="12" ry="14" fill="#33243B"/>
+  <circle cx="82" cy="107" r="4" fill="#FFFFFF"/>
+  <circle cx="126" cy="107" r="4" fill="#FFFFFF"/>
+  <!-- нос и рот -->
+  <path d="M100 134 l-7 -6 h14 z" fill="#FF8A7A"/>
+  <path d="M92 140 q8 8 16 0" stroke="#33243B" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- усы -->
+  <g stroke="#33243B" stroke-width="3" stroke-linecap="round" opacity=".65">
+    <path d="M62 130 h-22"/><path d="M62 140 l-22 6"/><path d="M62 120 l-22 -6"/>
+    <path d="M138 130 h22"/><path d="M138 140 l22 6"/><path d="M138 120 l22 -6"/>
+  </g>
+</svg>
