@@ -475,6 +475,36 @@ code{font-family:var(--mono)}
 .foot__legal b{color:#fff}
 .foot__meta{font-size:.8rem;opacity:.5;font-family:var(--mono)}
 
+/* ---------------- claim modal ---------------- */
+html.modal-lock{overflow:hidden}
+.modal{position:fixed;inset:0;z-index:250;display:grid;place-items:center;padding:1.2rem}
+.modal__back{
+  position:absolute;inset:0;background:rgba(51,36,59,.45);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  opacity:0;transition:opacity .3s;
+}
+.modal__card{
+  position:relative;width:min(100%,460px);
+  background:var(--cream);border:2px solid #fff;border-radius:var(--r-lg);
+  box-shadow:0 40px 90px -30px rgba(30,18,36,.65);
+  padding:2.6rem clamp(1.2rem,4vw,2rem) clamp(1.6rem,3vw,2rem);text-align:center;
+  transform:translateY(24px) scale(.96);opacity:0;
+  transition:transform .35s cubic-bezier(.2,.9,.3,1.2),opacity .3s;
+}
+.modal.on .modal__back{opacity:1}
+.modal.on .modal__card{transform:none;opacity:1}
+.modal__x{
+  position:absolute;top:.8rem;right:.9rem;width:38px;height:38px;border-radius:50%;
+  border:0;background:#fff;color:var(--ink);box-shadow:var(--sh-sm);
+  font-size:1.25rem;line-height:1;cursor:pointer;
+  transition:transform .25s cubic-bezier(.2,.9,.3,1.3),color .2s;
+}
+.modal__x:hover{transform:rotate(90deg);color:var(--coral)}
+.modal__h{font-size:clamp(1.5rem,4vw,1.9rem);margin:.2rem 0 1.1rem}
+.modal__open{margin:.6rem auto 0;max-width:32ch;font-weight:700;color:var(--ink2)}
+.modal__note{margin:1rem auto 0;max-width:32ch;font-size:.84rem;color:var(--ink3);font-weight:700}
+.modal__btn{width:100%;margin-top:1.2rem}
+
 /* ---------------- toast ---------------- */
 .toast{
   position:fixed;left:50%;bottom:2rem;transform:translate(-50%,20px);z-index:300;

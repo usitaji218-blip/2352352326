@@ -308,13 +308,79 @@
   });
 
   /* ============================================================
-     13. Claim buttons
+     13. Claim-модалка: открытие по [data-claim], отсчёт до клейма
      ============================================================ */
   safe(function () {
-    $$('[data-claim]').forEach(function (el) {
-      el.addEventListener('click', function () {
-        /* no auto-scroll */
-      });
+    var modal = $('#modal');
+    if (!modal) return;
+    var mc = $('#modalClaim'), xBtn = $('.modal__x', modal);
+    var wait = $('#modalWait'), openMsg = $('#modalOpen'), dateEl = $('#modalDate');
+    var el = { d: $('#mCdD'), h: $('#mCdH'), m: $('#mCdM'), s: $('#mCdS') };
+    var target = new Date((C.airdrop && C.airdrop.claimOpens) || Date.now()).getTime();
+    var tId = null, hideT = null, lastFocus = null;
+
+    if (dateEl && C.airdrop) {
+      try {
+        dateEl.textContent = new Date(C.airdrop.claimOpens).toLocaleString('en-GB',
+          { dateStyle: 'long', timeStyle: 'short', timeZone: 'UTC' }) + ' UTC';
+      } catch (e) { dateEl.textContent = C.airdrop.claimOpens; }
+    }
+
+    function tick() {
+      var ms = target - Date.now();
+      var p = diffParts(ms);
+      if (el.d) el.d.textContent = p.d < 10 ? '0' + p.d : p.d;
+      if (el.h) el.h.textContent = p.h < 10 ? '0' + p.h : p.h;
+      if (el.m) el.m.textContent = p.m < 10 ? '0' + p.m : p.m;
+      if (el.s) el.s.textContent = p.s < 10 ? '0' + p.s : p.s;
+      var opened = ms <= 0;
+      if (wait) wait.hidden = opened;      // окно открылось → прячем отсчёт…
+      if (openMsg) openMsg.hidden = !opened; // …и показываем приветствие
+      if (opened && tId) { clearInterval(tId); tId = null; }
+    }
+
+    function openModal() {
+      lastFocus = document.activeElement;
+      clearTimeout(hideT);
+      modal.hidden = false;
+      requestAnimationFrame(function () { modal.classList.add('on'); });
+      document.documentElement.classList.add('modal-lock');
+      tick();
+      if (!tId) tId = setInterval(tick, 1000);
+      if (xBtn) xBtn.focus();
+    }
+    function closeModal() {
+      if (modal.hidden) return;
+      modal.classList.remove('on');
+      document.documentElement.classList.remove('modal-lock');
+      clearTimeout(hideT);
+      hideT = setTimeout(function () { modal.hidden = true; }, 300);
+      if (tId) { clearInterval(tId); tId = null; }
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    $$('[data-claim]').forEach(function (btn) {
+      btn.addEventListener('click', openModal);
+    });
+    $$('[data-close]', modal).forEach(function (btn) {
+      btn.addEventListener('click', closeModal);
+    });
+    addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.hidden) closeModal();
+    });
+    /* фокус не даём выскочить за пределы модалки */
+    modal.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab') return;
+      var f = $$('.modal__x, .modal__btn', modal).filter(function (b) { return b.offsetParent !== null; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    /* приём заявок не подключён — заглушка: сюда свой контракт/бэкенд */
+    if (mc) mc.addEventListener('click', function () {
+      toast('Connect your claim contract in js/main.js → #modalClaim');
     });
   });
 

@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.dexscreener.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20260907p">
+<link rel="stylesheet" href="css/style.css?v=20260909a">
 <script>
   /* фолбэк, если CDN недоступен: локальный векторный кот в пакете */
   function zcatFallback(img){
@@ -326,9 +326,34 @@
   </div>
 </footer>
 
+<!-- ============================ CLAIM MODAL ============================ -->
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal__back" data-close></div>
+  <div class="modal__card">
+    <button class="modal__x" type="button" data-close aria-label="Close dialog">×</button>
+    <p class="eyebrow">Season 1 claim</p>
+    <h3 class="modal__h" id="modalTitle">Claim your <span class="grad">$ZCAT</span></h3>
+
+    <div class="modal__wait" id="modalWait">
+      <p class="clock__label">Claim window opens in</p>
+      <div class="clock__grid">
+        <div><b id="mCdD">--</b><span>days</span></div>
+        <div><b id="mCdH">--</b><span>hrs</span></div>
+        <div><b id="mCdM">--</b><span>min</span></div>
+        <div><b id="mCdS">--</b><span>sec</span></div>
+      </div>
+      <p class="clock__date" id="modalDate">—</p>
+    </div>
+    <p class="modal__open" id="modalOpen" hidden>🎉 The claim window is open. Welcome, holder — you can claim your Season&nbsp;1 allocation.</p>
+
+    <p class="modal__note">Read-only: no seed phrase, no approvals, no “wallet validation”. Ever.</p>
+    <button class="btn btn--main btn--xl modal__btn" type="button" id="modalClaim">Claim $ZCAT</button>
+  </div>
+</div>
+
 <div class="toast" id="toast" hidden></div>
 
-<script src="js/config.js?v=20260907p"></script>
-<script src="js/main.js?v=20260907p"></script>
+<script src="js/config.js?v=20260909a"></script>
+<script src="js/main.js?v=20260909a"></script>
 </body>
 </html>
