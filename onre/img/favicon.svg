@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <!-- favicon onre.finance: белая скруглённая плитка + чёрное кольцо -->
+  <rect width="180" height="180" rx="38" fill="#FFFFFF"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" fill="#161512"
+        d="M 40 90 A 50 50 0 1 0 140 90 A 50 50 0 1 0 40 90 Z
+           M 68 90 A 22 22 0 1 0 112 90 A 22 22 0 1 0 68 90 Z"/>
+</svg>

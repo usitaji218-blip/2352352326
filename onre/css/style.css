@@ -1,0 +1,241 @@
+/* ============================================================
+   ONRE — Allocation Checker
+   Палитра / шрифты / радиусы — в :root.
+   Эстетика: тёплый крем, белые линии-«чертежи», жёлтый акцент.
+   ============================================================ */
+
+:root {
+  --bg: #F2EDE2;
+  --ink: #161512;
+  --ink-2: #3E3B33;
+  --muted: #75705F;
+  --line: rgba(255, 255, 255, 0.78);
+  --panel: rgba(255, 255, 255, 0.22);
+  --panel-soft: rgba(255, 255, 255, 0.13);
+  --accent: #F1C232;
+  --accent-deep: #A87F0B;
+  --card: #FBF8F0;
+  --card-line: rgba(22, 21, 18, 0.09);
+  --r-lg: 26px;
+  --r-md: 18px;
+  --r-sm: 12px;
+  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+  --shadow: 0 14px 40px rgba(35, 30, 15, 0.08);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.55 var(--font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+.shell { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------------- кнопки ---------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  border-radius: 999px; border: 1px solid transparent;
+  padding: 16px 28px;
+  font: 500 15px/1 var(--font);
+  cursor: pointer; white-space: nowrap;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn .arr { transition: transform .2s ease; font-family: var(--font); }
+.btn:hover .arr { transform: translateX(4px); }
+.btn--light {
+  background: #fff; color: var(--ink);
+  border-color: rgba(22, 21, 18, 0.05);
+  box-shadow: 0 2px 12px rgba(35, 30, 15, 0.07);
+}
+.btn--light:hover { box-shadow: 0 6px 18px rgba(35, 30, 15, 0.1); }
+.btn--accent {
+  background: var(--accent); color: #181510;
+  box-shadow: 0 8px 22px rgba(241, 194, 50, 0.35);
+}
+.btn--accent:hover { box-shadow: 0 10px 26px rgba(241, 194, 50, 0.45); }
+.btn--ghost {
+  background: transparent; color: var(--ink);
+  border-color: rgba(22, 21, 18, 0.16);
+}
+.btn--ghost:hover { background: rgba(255, 255, 255, 0.6); }
+.btn--lg { padding: 19px 36px; font-size: 16px; }
+
+/* ---------------- навигация ---------------- */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(242, 237, 226, 0.78);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+  transition: box-shadow .25s ease;
+}
+.nav.scrolled { box-shadow: 0 8px 24px rgba(35, 30, 15, 0.06); }
+.nav__in {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  height: 100px;
+}
+.nav__left { justify-self: start; display: flex; align-items: center; }
+.nav__links { display: flex; gap: 34px; }
+.nav__links a {
+  font-size: 15.5px; font-weight: 500; color: var(--ink-2); text-decoration: none;
+  transition: color .2s ease;
+}
+.nav__links a:hover { color: var(--ink); }
+.brand {
+  justify-self: center;
+  display: inline-flex; align-items: center;
+  color: var(--ink);
+  text-decoration: none;
+  transition: opacity .2s ease;
+}
+.brand:hover { opacity: 0.7; }
+.brand__logo { display: block; height: 22px; width: auto; color: inherit; }
+.nav__right { justify-self: end; display: flex; align-items: center; gap: 24px; }
+.aum { font-size: 15px; font-weight: 500; color: var(--ink-2); white-space: nowrap; }
+.aum b { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* бургер (мобильный) */
+.burger {
+  display: none;
+  width: 44px; height: 44px;
+  border: none; background: transparent; cursor: pointer;
+  position: relative;
+}
+.burger span {
+  position: absolute; left: 11px; right: 11px; height: 2px;
+  background: var(--ink); border-radius: 2px;
+  transition: transform .3s ease;
+}
+.burger span:nth-child(1) { top: 18px; }
+.burger span:nth-child(2) { top: 26px; }
+.burger.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+.burger.open span:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
+
+/* мобильное меню */
+.mnav {
+  position: absolute; top: 100%; left: 0; right: 0;
+  background: rgba(242, 237, 226, 0.98);
+  border-bottom: 1px solid rgba(22, 21, 18, 0.08);
+  box-shadow: 0 18px 30px rgba(35, 30, 15, 0.1);
+  animation: mnav-in .25s ease;
+}
+.mnav[hidden] { display: none; }
+@keyframes mnav-in { from { opacity: 0; transform: translateY(-8px); } }
+.mnav a {
+  display: block; padding: 19px 24px;
+  font-size: 17px; font-weight: 600; color: var(--ink); text-decoration: none;
+  border-top: 1px solid rgba(22, 21, 18, 0.06);
+}
+.mnav a:first-child { border-top: none; }
+.mnav a:active { background: rgba(255, 255, 255, 0.5); }
+
+/* ---------------- герой + сетка-«чертёж» ---------------- */
+.hero {
+  position: relative; overflow: hidden;
+  min-height: calc(100vh - 214px);
+  min-height: calc(100svh - 214px);
+  display: flex; align-items: center;
+  padding: 72px 0 64px;
+}
+.hero__grid { position: absolute; inset: 0; pointer-events: none; }
+.gl { position: absolute; background: var(--line); }
+.gl--v { top: 0; bottom: 0; width: 1px; }
+.gl--h { left: 0; right: 0; height: 1px; }
+.gl--v1 { left: 16.5%; } .gl--v2 { left: 31.5%; }
+.gl--v3 { left: 79.5%; } .gl--v4 { left: 88.5%; }
+.gl--h1 { top: 17%; } .gl--h2 { top: 80%; } .gl--h3 { top: 92%; }
+.gp { position: absolute; }
+.gp--mid { left: 31.5%; right: 20.5%; top: 17%; bottom: 20%; background: var(--panel); }
+.gp--rc { left: 88.5%; right: 0; top: 0; bottom: 80%; background: var(--panel-soft); }
+.gacc { position: absolute; background: var(--accent); }
+.gacc--tr { top: 17%; left: 88.5%; right: 0; height: 2px; }
+.gacc--bl { top: 80%; left: 0; width: 16.5%; height: 2px; }
+
+.hero__in {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.hero h1 {
+  margin: 0;
+  font-size: clamp(44px, 7.6vw, 104px);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+}
+.hero__sub {
+  margin: 26px 0 0;
+  font-size: clamp(16px, 1.7vw, 20px);
+  color: var(--ink-2);
+}
+.hero__in .btn { margin-top: 42px; }
+.hero__in .reveal:nth-child(2) { transition-delay: .08s; }
+.hero__in .reveal:nth-child(3) { transition-delay: .16s; }
+
+/* ---------------- бегущая строка бэкеров ---------------- */
+.marquee {
+  border-top: 1px solid var(--line);
+  padding: 32px 0;
+  overflow: hidden;
+}
+.marquee__track {
+  display: flex; width: max-content;
+  animation: marquee 36s linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee__track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee__list {
+  display: flex; align-items: center;
+  gap: 72px; padding-right: 72px;
+}
+.logo {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(22, 21, 18, 0.34);
+  white-space: nowrap;
+}
+.logo .mk { display: inline-block; font-size: 11px; line-height: 1; }
+.logo .mk--dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.logo .mk--x { font-weight: 800; }
+
+/* ---------------- reveal-анимации ---------------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .marquee__track { animation: none; }
+}
+
+/* ---------------- адаптив ---------------- */
+@media (max-width: 860px) {
+  .nav__in { height: 72px; }
+  .nav__links { display: none; }
+  .burger { display: block; }
+  .brand__logo { height: 20px; }
+  .nav__right { gap: 12px; }
+  .hero {
+    min-height: calc(100vh - 178px);
+    min-height: calc(100svh - 178px);
+    padding: 56px 0 48px;
+  }
+  .hero__grid { display: none; }
+  .hero__in .btn { margin-top: 34px; width: 100%; max-width: 320px; }
+  .marquee { padding: 26px 0; }
+  .marquee__list { gap: 44px; padding-right: 44px; }
+  .logo { font-size: 12px; }
+}
+@media (max-width: 720px) {
+  .aum { display: none; }
+}
+@media (max-width: 520px) {
+  .nav__right .btn { padding: 13px 18px; font-size: 14px; }
+  .hero h1 { letter-spacing: -0.025em; }
+}
