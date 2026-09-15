@@ -1,359 +1,125 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZCAT — Anonymous Cat · Airdrop Season 1</title>
-<meta name="description" content="$ZCAT airdrop Season 1 on Solana. Hold the cat, get paid in ZEC. 3% of every transfer is converted to Zcash and dropped to holders.">
-<meta name="theme-color" content="#FFF7EE">
-<meta name="color-scheme" content="light">
-<meta property="og:title" content="ZCAT — Anonymous Cat · Airdrop Season 1">
-<meta property="og:description" content="Hold the cat, get paid in ZEC. 3% of every transfer goes to holders in Zcash.">
-<meta property="og:image" content="img/og.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="img/og.jpg">
-<!-- иконки — официальный аватар токена из метаданных Dexscreener -->
-<link rel="icon" href="https://cdn.dexscreener.com/cms/images/-DNNIYh0wlMsd_v4?width=128&height=128&quality=95&format=auto">
-<link rel="apple-touch-icon" href="https://cdn.dexscreener.com/cms/images/-DNNIYh0wlMsd_v4?width=180&height=180&quality=95&format=auto">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.dexscreener.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20260909a">
-<script>
-  /* фолбэк, если CDN недоступен: локальный векторный кот в пакете */
-  function zcatFallback(img){
-    img.onerror = null;
-    img.src = 'img/cat-fallback.svg';
-  }
-</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OnRe | Allocation Checker</title>
+  <meta name="description" content="Check your OnRe allocation. Connect your wallet to view eligibility and allocation details.">
+  <meta name="theme-color" content="#101717">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23101717'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23d5fbec' stroke-width='6'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23d5fbec'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="site-noise" aria-hidden="true"></div>
+  <div class="site-grid" aria-hidden="true"></div>
+  <div class="ambient ambient--one" aria-hidden="true"></div>
+  <div class="ambient ambient--two" aria-hidden="true"></div>
 
-<div class="progress" id="progress" aria-hidden="true"></div>
-
-<!-- ============================ LIVE TICKER ============================ -->
-<a class="ticker" id="ticker" href="https://dexscreener.com/solana/btccxxtfi7a9xjte1exkn38jgie35s6gnerxd8dm61rc" target="_blank" rel="noopener noreferrer" aria-label="Live ZCAT market data on Dexscreener">
-  <span class="ticker__live">LIVE</span>
-  <span class="ticker__sep"></span>
-  <span class="ticker__item">ZCAT <b id="tkPrice">–</b></span>
-  <span class="ticker__sep"></span>
-  <span class="ticker__item hide-sm">24h <b id="tkChange">–</b></span>
-  <span class="ticker__sep hide-sm"></span>
-  <span class="ticker__item hide-sm">MCap <b id="tkMcap">–</b></span>
-  <span class="ticker__sep hide-sm"></span>
-  <span class="ticker__item hide-sm">Liq <b id="tkLiq">–</b></span>
-  <span class="ticker__sep"></span>
-  <span class="ticker__item">ZEC <b id="tkZec">–</b></span>
-  <span class="ticker__note hide-sm">powered by Dexscreener</span>
-</a>
-
-<!-- ============================ HEADER ============================ -->
-<header class="nav" id="nav">
-  <div class="shell nav__in">
-    <a class="brand" href="#top">
-      <span class="brand__ava brand__ava--mat"><img referrerpolicy="no-referrer" src="https://cdn.dexscreener.com/cms/images/-DNNIYh0wlMsd_v4?width=200&height=200&quality=95&format=auto" alt="" width="40" height="40" data-img="logo" onerror="zcatFallback(this)"></span>
-      <span class="brand__txt">$ZCAT</span>
+  <header class="topbar">
+    <a class="brand" href="https://www.onre.finance/" target="_blank" rel="noopener noreferrer" aria-label="OnRe home">
+      <svg class="brand__mark" viewBox="0 0 44 44" aria-hidden="true">
+        <circle cx="22" cy="22" r="15" fill="none" stroke="currentColor" stroke-width="5"/>
+        <circle cx="22" cy="22" r="4.5" fill="currentColor"/>
+      </svg>
+      <span>ONRE</span>
     </a>
 
-    <div class="nav__cta">
-      <button class="btn btn--main mag" type="button" data-claim>Claim</button>
-    </div>
-  </div>
-</header>
+    <nav class="topbar__nav" aria-label="Main navigation">
+      <a href="https://www.onre.finance/" target="_blank" rel="noopener noreferrer">OnRe.finance <span aria-hidden="true">↗</span></a>
+      <a href="https://docs.onre.finance/" target="_blank" rel="noopener noreferrer">Docs <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
 
-<main id="top">
-
-<!-- ============================ HERO ============================ -->
-<section class="hero">
-  <div class="blobs" aria-hidden="true">
-    <span class="blob blob--1"></span>
-    <span class="blob blob--2"></span>
-    <span class="blob blob--3"></span>
-    <span class="blob blob--4"></span>
-  </div>
-  <div class="coins" id="coins" aria-hidden="true"></div>
-  <div class="paws" id="paws" aria-hidden="true"></div>
-
-  <div class="shell hero__in">
-    <div class="hero__copy">
-      <p class="chip reveal"><span class="chip__dot"></span> Airdrop Season 1 · live on Solana</p>
-
-      <h1 class="hero__h reveal">
-        Hold the cat.<br>
-        <span class="grad">Get paid in ZEC.</span>
-      </h1>
-
-      <p class="hero__p reveal">
-        Every <b>$ZCAT</b> transfer pays a <b>3% tax</b>. It is converted into <b>Zcash</b> and dropped straight
-        into the wallets of holders — automatically, forever. Season 1 adds a one-off <b>allocation</b> for
-        everyone who held through the snapshot.
-      </p>
-
-      <div class="hero__cta reveal">
-        <button class="btn btn--main btn--xl mag" type="button" data-claim>Claim my $ZCAT</button>
-      </div>
-
-      <ul class="hero__trust reveal">
-        <li><span><b>Solana</b> SPL</span></li>
-        <li><span><b>ZCAT/ZEC</b> pair</span></li>
-        <li><span><b>2,320 ZEC</b> already paid out</span></li>
-        <li><span><b>470k+</b> payouts</span></li>
-      </ul>
+  <main class="page">
+    <div class="page__intro">
+      <div class="eyebrow"><span class="eyebrow__dot"></span> OnRe allocation checker</div>
+      <h1>Check your <span>allocation.</span></h1>
+      <p>Connect your wallet to view your eligibility and allocation details.</p>
     </div>
 
-    <div class="hero__art">
-      <div class="hero__card" id="heroCard">
-        <div class="hero__glow" aria-hidden="true"></div>
-        <img class="hero__cat" id="heroCat"
-             src="https://cdn.dexscreener.com/cms/images/-DNNIYh0wlMsd_v4?width=800&height=800&quality=95&format=auto"
-             alt="ZCAT — Anonymous Cat" width="480" height="480"
-             onerror="zcatFallback(this)">
-        <div class="hero__tag hero__tag--l">🐾 anonymous<br>by design</div>
-        <div class="hero__tag hero__tag--r"><span id="heroZecTicker">2,320</span> ZEC<br><i>distributed</i></div>
+    <section class="checker" aria-labelledby="checker-title">
+      <div class="checker__topline">
+        <div class="checker__identity">
+          <span class="identity-mark" aria-hidden="true">
+            <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="14.5" fill="none" stroke="currentColor" stroke-width="4.5"/><circle cx="22" cy="22" r="4" fill="currentColor"/></svg>
+          </span>
+          <span>
+            <b>Allocation checker</b>
+            <small>OnRe community distribution</small>
+          </span>
+        </div>
+        <span class="network"><i></i> Solana</span>
       </div>
 
-      <div class="hero__schedule reveal" id="timeline">
-        <header class="sec__head sec__head--hero">
-          <p class="eyebrow">Timeline</p>
-          <h2 class="sec__h">Season 1 <span class="grad">claim schedule</span></h2>
-        </header>
+      <div class="checker__body" id="checkerBody">
+        <div class="step-mark" aria-hidden="true">01</div>
+        <h2 id="checker-title">Connect your wallet</h2>
+        <p class="checker__copy">Use the wallet that participated in the OnRe ecosystem. We only read your public address — no transaction or signature is required.</p>
 
-        <div class="clock clock--hero">
-          <p class="clock__label">Claim window opens in</p>
-          <div class="clock__grid" id="clock">
-            <div><b id="cdD">--</b><span>days</span></div>
-            <div><b id="cdH">--</b><span>hrs</span></div>
-            <div><b id="cdM">--</b><span>min</span></div>
-            <div><b id="cdS">--</b><span>sec</span></div>
+        <button class="connect-button" id="connectButton" type="button">
+          <span class="connect-button__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4.5 8.5h12.75A2.75 2.75 0 0 1 20 11.25v5.5a2.75 2.75 0 0 1-2.75 2.75H6.75A2.75 2.75 0 0 1 4 16.75v-7.5A2.75 2.75 0 0 1 6.75 6.5H17"/><path d="M4.5 8.5V6.75A2.75 2.75 0 0 1 7.25 4h9.5a2.75 2.75 0 0 1 2.75 2.75v.5M16 14.25h.01"/></svg>
+          </span>
+          <span>Connect wallet</span>
+          <span class="connect-button__arrow" aria-hidden="true">→</span>
+        </button>
+
+        <div class="error-state" id="errorState" role="alert" hidden>
+          <span class="error-state__icon" aria-hidden="true">!</span>
+          <span><strong>An Error Occurred</strong><small>Please try to connect a different wallet</small></span>
+          <button class="error-state__close" id="errorClose" type="button" aria-label="Dismiss error">×</button>
+        </div>
+
+        <div class="read-only"><span class="lock" aria-hidden="true">⌁</span> Read-only connection <span class="read-only__sep">·</span> No approvals</div>
+      </div>
+
+      <div class="checker__verification">
+        <div class="verification__head">
+          <div class="verification__label">
+            <span class="cap-mark" aria-hidden="true">C</span>
+            <span>
+              <b id="captchaTitle">Verify you're human</b>
+              <small id="captchaHint">This helps us keep the checker secure</small>
+            </span>
           </div>
-          <p class="clock__date" id="claimDate">—</p>
+          <button class="captcha-box" id="captchaButton" type="button" aria-label="Verify you're human">
+            <span class="captcha-check" id="captchaCheck"></span>
+          </button>
         </div>
+        <div class="verification__progress" id="captchaProgress" hidden><span></span></div>
+        <div class="verification__foot"><a href="https://capjs.js.org/" target="_blank" rel="noopener noreferrer">Secured by Cap <span aria-hidden="true">↗</span></a><span>Privacy-friendly verification</span></div>
       </div>
+    </section>
+
+    <div class="page__note"><span class="note-mark">i</span> Never share your recovery phrase or private key. OnRe will never ask for it.</div>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year">2026</span> OnRe</span>
+    <div class="footer__links">
+      <a href="https://www.onre.finance/legal/open-access-interface-terms-of-use" target="_blank" rel="noopener noreferrer">Terms</a>
+      <a href="https://www.onre.finance/" target="_blank" rel="noopener noreferrer">Official website</a>
     </div>
-  </div>
+  </footer>
 
-  <div class="scroll-hint" aria-hidden="true"><span></span>scroll</div>
-</section>
-
-<!-- ============================ STATS ============================ -->
-<section class="stats">
-  <div class="shell stats__grid">
-    <div class="stat reveal">
-      <p class="stat__n"><span class="od" data-to="2320" data-dec="0">0</span></p>
-      <p class="stat__l">ZEC distributed to holders</p>
-    </div>
-    <div class="stat reveal">
-      <p class="stat__n">$<span class="od" data-to="2.8" data-dec="1">0</span>M</p>
-      <p class="stat__l">paid out in ZEC rewards</p>
-    </div>
-    <div class="stat reveal">
-      <p class="stat__n"><span class="od" data-to="470000" data-sep="1">0</span>+</p>
-      <p class="stat__l">automatic holder payouts</p>
-    </div>
-    <div class="stat reveal">
-      <p class="stat__n" id="statMcap">$122M</p>
-      <p class="stat__l">market cap <i>· live</i></p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ STICKERS ============================ -->
-<section class="tape" aria-label="ZCAT stickers">
-  <div class="shell tape__in">
-    <div class="sticker" style="--rot:-7deg;--bg:#FFE3A0"><img referrerpolicy="no-referrer" src="https://cdn.dexscreener.com/cms/images/-DNNIYh0wlMsd_v4?width=200&height=200&quality=95&format=auto" alt="ZCAT sticker" width="120" height="120" loading="lazy" onerror="zcatFallback(this)"><span>hold</span></div>
-    <div class="sticker" style="--rot:5deg;--bg:#FFC9DE"><img referrerpolicy="no-referrer" src="https://cdn.dexscreener.com/cms/images/-DNNIYh0wlMsd_v4?width=200&height=200&quality=95&format=auto" alt="ZCAT sticker" width="120" height="120" loading="lazy" onerror="zcatFallback(this)"><span>anon</span></div>
-    <div class="sticker" style="--rot:-4deg;--bg:#BDEDD8"><img referrerpolicy="no-referrer" src="https://cdn.dexscreener.com/cms/images/-DNNIYh0wlMsd_v4?width=200&height=200&quality=95&format=auto" alt="ZCAT sticker" width="120" height="120" loading="lazy" onerror="zcatFallback(this)"><span>paid in ZEC</span></div>
-    <div class="sticker" style="--rot:8deg;--bg:#DCD5FF"><img referrerpolicy="no-referrer" src="https://cdn.dexscreener.com/cms/images/-DNNIYh0wlMsd_v4?width=200&height=200&quality=95&format=auto" alt="ZCAT sticker" width="120" height="120" loading="lazy" onerror="zcatFallback(this)"><span>no seed phrase</span></div>
-    <div class="sticker" style="--rot:-6deg;--bg:#FFC49B"><img referrerpolicy="no-referrer" src="https://cdn.dexscreener.com/cms/images/-DNNIYh0wlMsd_v4?width=200&height=200&quality=95&format=auto" alt="ZCAT sticker" width="120" height="120" loading="lazy" onerror="zcatFallback(this)"><span>wagmi</span></div>
-    <div class="sticker" style="--rot:4deg;--bg:#FFF3DF"><img referrerpolicy="no-referrer" src="https://cdn.dexscreener.com/cms/images/-DNNIYh0wlMsd_v4?width=200&height=200&quality=95&format=auto" alt="ZCAT sticker" width="120" height="120" loading="lazy" onerror="zcatFallback(this)"><span>gm</span></div>
-  </div>
-</section>
-
-<!-- ============================ HOW IT WORKS ============================ -->
-<section class="sec sec--mint" id="how">
-  <div class="shell">
-    <header class="sec__head reveal">
-      <p class="eyebrow">Mechanics</p>
-      <h2 class="sec__h">How $ZCAT <span class="grad">rewards holders</span></h2>
-      <p class="sec__p">No staking, no lockups, and no manual reward cycle. Hold eligible $ZCAT and the distribution logic does the rest.</p>
-    </header>
-
-    <div class="steps">
-      <article class="step reveal">
-        <div class="step__ico" aria-hidden="true">
-          <span class="step__parcel"><span class="step__parcel-label">Hold</span></span>
-        </div>
-        <p class="step__n">Step 01</p>
-        <h3>Hold $ZCAT</h3>
-        <p>Keep at least <b>$20</b> worth of $ZCAT in a self-custody Solana wallet. Exchange wallets do not count.</p>
-      </article>
-      <article class="step reveal">
-        <div class="step__ico" aria-hidden="true">
-          <span class="step__parcel"><span class="step__parcel-label">3% tax</span></span>
-        </div>
-        <p class="step__n">Step 02</p>
-        <h3>Trading pays 3%</h3>
-        <p>Every buy, sell and transfer pays a <b>3% tax</b>. The tax is auto-converted into <b>Zcash (ZEC)</b>.</p>
-      </article>
-      <article class="step reveal">
-        <div class="step__ico" aria-hidden="true">
-          <span class="step__parcel"><span class="step__parcel-label">ZEC drop</span></span>
-        </div>
-        <p class="step__n">Step 03</p>
-        <h3>ZEC lands in your wallet</h3>
-        <p>Rewards are streamed to eligible wallets — <b>470,000+</b> payouts and counting. No claim needed.</p>
-      </article>
-      <article class="step reveal">
-        <div class="step__ico" aria-hidden="true">
-          <span class="step__parcel"><span class="step__parcel-label">Season 1</span></span>
-        </div>
-        <p class="step__n">Step 04</p>
-        <h3>Season 1 allocation</h3>
-        <p>On top of the ZEC stream, snapshot holders get a one-off <b>$ZCAT allocation</b>, claimable when the window opens.</p>
-      </article>
-    </div>
-
-    <div class="steps__cta reveal">
-      <button class="btn btn--main btn--xl mag" type="button" data-claim>Claim Season 1 allocation</button>
-      <p class="steps__note">Read-only: no seed phrase, no approvals, no “wallet validation”. Ever.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ TIERS ============================ -->
-<section class="sec sec--cream" id="tiers">
-  <div class="shell">
-    <header class="sec__head reveal">
-      <p class="eyebrow">Season 1 tiers</p>
-      <h2 class="sec__h">Allocation <span class="grad">tiers</span></h2>
-      <p class="sec__p">Your Season 1 allocation depends on the size of your qualifying $ZCAT position during the snapshot window.</p>
-    </header>
-
-    <div class="tiers" id="tiersGrid"></div>
-
-    <div class="pool reveal">
-      <div class="pool__chart" id="poolChart" style="--p1:35;--p2:25;--p3:20;--p4:12;--p5:8" role="img" aria-label="Allocation split by tier"></div>
-      <div class="pool__legend" id="poolLegend"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ TIMELINE ============================ -->
-<section class="sec">
-  <div class="shell">
-    <header class="sec__head reveal">
-      <p class="eyebrow">Process</p>
-      <h2 class="sec__h">How Season 1 <span class="grad">rolls out</span></h2>
-    </header>
-
-    <ol class="tl" id="tlList"></ol>
-  </div>
-</section>
-
-<!-- ============================ RULES ============================ -->
-<section class="sec sec--pink" id="rules">
-  <div class="shell rules">
-    <div class="rules__copy">
-      <p class="eyebrow reveal">Eligibility</p>
-      <h2 class="sec__h reveal">Wallet screening <span class="grad">rules</span></h2>
-      <p class="sec__p reveal">To keep the distribution fair, wallet activity is reviewed before final allocations are approved.</p>
-      <ul class="ticks reveal">
-        <li><span class="tick__icon" aria-hidden="true">🐾</span><span>Snapshot taken at a random block inside the window</span></li>
-        <li><span class="tick__icon" aria-hidden="true">🐾</span><span>Minimum hold of <b>$20</b> for at least <b>14 days</b></span></li>
-        <li><span class="tick__icon" aria-hidden="true">🐾</span><span>One allocation per wallet cluster, not per wallet</span></li>
-        <li><span class="tick__icon" aria-hidden="true">🐾</span><span>Exchange / custodial / bridge addresses excluded</span></li>
-        <li><span class="tick__icon" aria-hidden="true">🐾</span><span>Coordinated clusters are filtered out before distribution</span></li>
-      </ul>
-    </div>
-    <div class="rules__art reveal">
-      <div class="rules__card">
-        <p class="rules__q">Official claim safety</p>
-        <p class="rules__a">
-          The Season 1 claim is for eligible $ZCAT holders only. It never asks for your seed phrase,
-          private key, or any kind of wallet validation.
-        </p>
-        <p class="rules__sign">Use only the official links on this page.</p>
+  <div class="wallet-dialog" id="walletDialog" hidden>
+    <button class="wallet-dialog__backdrop" type="button" data-close-wallet aria-label="Close wallet selector"></button>
+    <div class="wallet-dialog__card" role="dialog" aria-modal="true" aria-labelledby="walletDialogTitle">
+      <button class="dialog-close" type="button" data-close-wallet aria-label="Close wallet selector">×</button>
+      <div class="dialog__eyebrow">Secure connection</div>
+      <h2 id="walletDialogTitle">Choose a wallet</h2>
+      <p>Connect a supported wallet to continue.</p>
+      <div class="wallet-list">
+        <button class="wallet-option" type="button" data-wallet="Phantom"><span class="wallet-icon wallet-icon--phantom">◈</span><span>Phantom</span><span class="wallet-option__arrow">→</span></button>
+        <button class="wallet-option" type="button" data-wallet="Solflare"><span class="wallet-icon wallet-icon--solflare">S</span><span>Solflare</span><span class="wallet-option__arrow">→</span></button>
+        <button class="wallet-option" type="button" data-wallet="Backpack"><span class="wallet-icon wallet-icon--backpack">B</span><span>Backpack</span><span class="wallet-option__arrow">→</span></button>
       </div>
-      <div class="rules__warn">
-        ⚠️ Never type your recovery phrase into any site. Not this one, not any other.
-      </div>
+      <p class="dialog__safe"><span class="lock">⌁</span> Connection is read-only in this demo</p>
     </div>
   </div>
-</section>
 
-<!-- ============================ FAQ ============================ -->
-<section class="sec sec--cream" id="faq">
-  <div class="shell faq">
-    <header class="sec__head reveal">
-      <p class="eyebrow">FAQ</p>
-      <h2 class="sec__h">Frequently asked <span class="grad">questions</span></h2>
-    </header>
-    <div class="faq__list" id="faqList"></div>
-  </div>
-</section>
-
-<!-- ============================ CONTRACT ============================ -->
-<section class="sec" id="contract">
-  <div class="shell">
-    <div class="ca reveal">
-      <p class="ca__label">Official contract · Solana</p>
-      <div class="ca__box">
-        <code id="caCode">HcRLc9VDgjLeK154xDawfb1dmVJ98DoSqcwTHGqiDeJR</code>
-        <button class="btn btn--main mag" id="copyBtn" type="button" data-ca="HcRLc9VDgjLeK154xDawfb1dmVJ98DoSqcwTHGqiDeJR">Copy CA</button>
-      </div>
-      <p class="ca__verify">always verify character by character →
-        <a href="https://solscan.io/token/HcRLc9VDgjLeK154xDawfb1dmVJ98DoSqcwTHGqiDeJR" target="_blank" rel="noopener noreferrer">Solscan ↗</a>
-      </p>
-      <div class="links" id="links"></div>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<!-- ============================ FOOTER ============================ -->
-<footer class="foot">
-  <div class="shell foot__in">
-    <p class="foot__legal">
-      <b>$ZCAT is a meme coin.</b> It has no intrinsic value and no expectation of financial return.
-      Nothing on this page is financial advice. Rewards depend entirely on trading activity — if volume stops,
-      payouts stop. Only spend what you can afford to lose completely, verify the contract address yourself
-      before swapping, and never share your recovery phrase. Anonymous Cat is a community project and is not
-      affiliated with the Zcash project or the Electric Coin Company.
-    </p>
-    <p class="foot__meta">Anonymous Cat · © <span id="year">2026</span></p>
-  </div>
-</footer>
-
-<!-- ============================ CLAIM MODAL ============================ -->
-<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal__back" data-close></div>
-  <div class="modal__card">
-    <button class="modal__x" type="button" data-close aria-label="Close dialog">×</button>
-    <p class="eyebrow">Season 1 claim</p>
-    <h3 class="modal__h" id="modalTitle">Claim your <span class="grad">$ZCAT</span></h3>
-
-    <div class="modal__wait" id="modalWait">
-      <p class="clock__label">Claim window opens in</p>
-      <div class="clock__grid">
-        <div><b id="mCdD">--</b><span>days</span></div>
-        <div><b id="mCdH">--</b><span>hrs</span></div>
-        <div><b id="mCdM">--</b><span>min</span></div>
-        <div><b id="mCdS">--</b><span>sec</span></div>
-      </div>
-      <p class="clock__date" id="modalDate">—</p>
-    </div>
-    <p class="modal__open" id="modalOpen" hidden>🎉 The claim window is open. Welcome, holder — you can claim your Season&nbsp;1 allocation.</p>
-
-    <p class="modal__note">Read-only: no seed phrase, no approvals, no “wallet validation”. Ever.</p>
-    <button class="btn btn--main btn--xl modal__btn" type="button" id="modalClaim">Claim $ZCAT</button>
-  </div>
-</div>
-
-<div class="toast" id="toast" hidden></div>
-
-<script src="js/config.js?v=20260909a"></script>
-<script src="js/main.js?v=20260909a"></script>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <script src="js/main.js"></script>
 </body>
 </html>
