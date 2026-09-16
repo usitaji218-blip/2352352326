@@ -98,17 +98,31 @@
   var walletModal = $('walletModal');
   var btnCloseWallet = $('btnCloseWalletModal');
 
+  function updateBodyLock() {
+    var anyOpen = (walletModal && walletModal.classList.contains('is-open')) ||
+                  (resultModal && resultModal.classList.contains('is-open'));
+    if (anyOpen) {
+      document.body.classList.add('modal-locked');
+    } else {
+      document.body.classList.remove('modal-locked');
+    }
+  }
+
   function openWalletModal() {
     closeWalletMenu();
     if (walletModal) {
       walletModal.classList.add('is-open');
+      updateBodyLock();
       var input = $('inputWalletAddress');
       if (input) setTimeout(function () { input.focus(); }, 100);
     }
   }
 
   function closeWalletModal() {
-    if (walletModal) walletModal.classList.remove('is-open');
+    if (walletModal) {
+      walletModal.classList.remove('is-open');
+      updateBodyLock();
+    }
   }
 
   function toggleWalletMenu() {
@@ -228,11 +242,17 @@
 
   function openResultModal() {
     closeWalletModal();
-    if (resultModal) resultModal.classList.add('is-open');
+    if (resultModal) {
+      resultModal.classList.add('is-open');
+      updateBodyLock();
+    }
   }
 
   function closeResultModal() {
-    if (resultModal) resultModal.classList.remove('is-open');
+    if (resultModal) {
+      resultModal.classList.remove('is-open');
+      updateBodyLock();
+    }
   }
 
   if (btnCloseResult) {
